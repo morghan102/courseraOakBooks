@@ -1,10 +1,12 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
+import BookList from '../components/Booklist';
+
 const BooksScreen = () => {
  return (
      <View>
-         <Text>Books screen</Text>
+         <BookList />
      </View>
  );   
 }
