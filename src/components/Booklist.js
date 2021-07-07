@@ -1,22 +1,30 @@
 import React from 'react';
-import { StyleSheet, View, FlatList, Text } from 'react-native';
+import { StyleSheet, View, FlatList, Text, TouchableOpacity } from 'react-native';
+
+import { withNavigation } from 'react-navigation';
 
 import books from '../../data/books.json';
 
 const BookList = (props) => {
- return (
-     <View>
-        <FlatList
-         data={books}
-         renderItem={({item}) => {
-            return (
-                <Text style={styles.textStyle}>{item.title}</Text>
-            );
-         }} 
-          keyExtractor={book => book.title}
-       />
-     </View>
- );   
+    return (
+        <View>
+            <FlatList
+                data={books}
+                renderItem={({ item }) => {
+                    return (
+                        <TouchableOpacity 
+                        onPress={() => {
+                            props.navigation.navigate('BookDetail', {book: item});
+                        }}
+                        >
+                            <Text style={styles.textStyle}>{item.title}</Text>
+                        </TouchableOpacity>
+                    );
+                }}
+                keyExtractor={book => book.title}
+            />
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -26,4 +34,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default BookList;
+export default withNavigation(BookList); //adds nav and props behind the scenes
